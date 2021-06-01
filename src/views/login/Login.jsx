@@ -1,18 +1,16 @@
-import React, {useState} from "react";
+import React from "react";
 import cx from "classnames";
 import { Alert, Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { signInApi } from "../../api/authorizationAPI";
 import { firstSetAuth } from "../../store/authReducer";
 
 import img from "../../assets/img/logo.png";
 import "./styles/login.scss";
-import Loader from "../loder/Loader";
-import { isObjectEmpty } from "../../modules/isObjEmpty";
 
-const Login = ({ authorized, user }) => {
+const Login = () => {
   const {
     register,
     handleSubmit,
@@ -36,29 +34,11 @@ const Login = ({ authorized, user }) => {
         dispatch(firstSetAuth(res.data.data));
         history.push("/calendar");
       })
-      .catch((_) => setErrorResponse(true));
+      .catch(() => setErrorResponse(true));
   };
-  // const user = useSelector((state) => state.auth.dataUser);
-
-
-  const [data, setDataUser] = useState(user)
-
-  React.useEffect(() => {
-    setDataUser(user)
-    console.log(data)
-  }, [user]);
-  const isUserEmpty = isObjectEmpty(data);
-
-  if (authorized) {
-    return <Redirect to="/calendar" />;
-  }
-  console.log("auth", authorized);
-  console.log("empty", isUserEmpty);
-  // console.log(user);
 
   return (
     <Form className="authorization-form" onSubmit={handleSubmit(onSubmit)}>
-      {authorized && isUserEmpty ? <Loader /> : null}
       <div className="authorization-form__box">
         <img src={img} className="authorization-form__img" alt="logo" />
         <Form.Group controlId="formBasicEmail" className="mb-0">

@@ -1,18 +1,16 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, useHistory } from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import Header from "./views/header/Header";
 import Layout from "./views/layout/Layout";
 import PageRouter from "./router/PageRouter";
-import { getUserApi, logOutApi } from "./api/authorizationAPI";
-import { isAuthUser } from "./store/authReducer";
+import { getUserApi } from "./api/authorizationAPI";
+import { isAuthUser, setAuthUserPending } from "./store/authReducer";
 
 const promiseUser = getUserApi();
-// const promiseUser = logOutApi();
 
 export default function App() {
-  const user = useSelector((state) => state.auth.dataUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,9 +18,11 @@ export default function App() {
       .then((res) => {
         const user = res.data.data;
         dispatch(isAuthUser([user, true]));
+        dispatch(setAuthUserPending(false));
       })
       .catch(() => {
         dispatch(isAuthUser([{}, false]));
+        dispatch(setAuthUserPending(false));
       });
   }, []);
 
@@ -31,7 +31,7 @@ export default function App() {
       <div className="App">
         <Header />
         <Layout>
-          <PageRouter user={user} />
+          <PageRouter />
         </Layout>
       </div>
     </Router>

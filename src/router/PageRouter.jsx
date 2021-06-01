@@ -1,28 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Calendar from "../views/calendar/Calendar";
 import Login from "../views/login/Login";
 import Contacts from "../views/contacts/Contacts";
+import PrivateRoute from "./PrivateRoute";
 
-const PageRouter = ({ user }) => {
-  const isAuth = useSelector((state) => state.auth.isAuthUser);
-
+const PageRouter = () => {
   return (
     <>
-      <Redirect to="/login" />
       <Switch>
-        <Route
-          path="/login"
-          exact
-          component={() => <Login authorized={isAuth} user={user} />}
-        />
-        <Route
-          path="/calendar"
-          exact
-          component={() => <Calendar authorized={isAuth} />}
-        />
-        <Route path="/contacts" exact component={Contacts} />
+        <Route path="/login" exact component={Login} />
+        <PrivateRoute path="/calendar" exact component={Calendar} />
+        <PrivateRoute path="/contacts" exact component={Contacts} />
       </Switch>
     </>
   );
