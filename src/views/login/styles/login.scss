@@ -1,0 +1,24 @@
+.authorization-form {
+    height: calc(100vh - 92px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__box {
+        max-width: 500px;
+        flex: 0 0 100%;
+    }
+
+    &__img {
+        display: block;
+        margin: 0 auto 2rem;
+    }
+
+    &__error {
+        opacity: 0;
+
+        &.active {
+            opacity: 1;
+        }
+    }
+}
