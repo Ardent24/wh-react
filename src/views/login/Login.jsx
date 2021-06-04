@@ -1,11 +1,12 @@
 import React from "react";
 import cx from "classnames";
-import { Alert, Button, Form } from "react-bootstrap";
-import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { Alert, Button, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+
 import { signInApi } from "../../api/authorizationAPI";
-import { firstSetAuth } from "../../store/authReducer";
+import { firstSetAuth } from "../../store/reducers/authReducer";
 
 import img from "../../assets/img/logo.png";
 import "./styles/login.scss";

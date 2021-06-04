@@ -30,6 +30,18 @@
             }
         }
 
+        &__item {
+            background-color: red;
+
+            &:hover {
+                background-color: transparent;
+
+                & a {
+                    text-decoration: none;
+                }
+            }
+        }
+
     }
 
     &-main {
@@ -55,6 +67,20 @@
             margin: 0.14%;
             border-radius: 10px;
             transition: .5s;
+            position: relative;
+
+            & .block-visible {
+                position: absolute;
+                top: 0;
+                opacity: 1;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                max-width: 2rem;
+                margin: 0 auto;
+                top: 50%;
+                transform: translateY(-50%);
+            }
 
             &.day-week {
                 background-color: white;
@@ -98,6 +124,16 @@
                 color: #999;
                 background-color: #e2e3e5;
                 border-color: #d3d6d8;
+            }
+
+            &.holiday {
+                & > * {
+                    opacity: 0.2;
+                }
+
+                & .block-visible {
+                    opacity: 1;
+                }
             }
 
             &.day-now {
