@@ -1,14 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createLogger } from "redux-logger";
-
-import contactsReducer from "./reducers/contactsReducer";
-import authReducer from "./reducers/authReducer";
-import calendarReducer, {
-  getNowDate,
-  setRouterCalendar,
-} from "./reducers/calendarReducer";
-
-import { dateNow } from "../modules/date";
+import authReducer from "./authReducer";
 
 const logger = createLogger({
   duration: true,
@@ -21,11 +13,8 @@ const logger = createLogger({
     error: () => "#ff0005",
   },
 });
-
 const rootReducer = combineReducers({
   auth: authReducer,
-  calendar: calendarReducer,
-  contacts: contactsReducer,
 });
 
 export const store = configureStore({
@@ -38,13 +27,3 @@ export const store = configureStore({
   devTools: true,
   reducer: rootReducer,
 });
-
-const createStoreDateNow = () => {
-  const date = dateNow();
-  const dateRoute = `${date.year}/${date.month}`;
-
-  store.dispatch(getNowDate(date));
-  store.dispatch(setRouterCalendar(dateRoute));
-};
-
-createStoreDateNow();

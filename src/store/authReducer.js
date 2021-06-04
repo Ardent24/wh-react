@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const authReducer = createSlice({
   name: "authReducer",
   initialState: {
     dataUser: {},
     isAuthUser: false,
-    isLoading: true,
+    isLoading: true
   },
   reducers: {
     firstSetAuth(state, action) {
@@ -25,14 +25,12 @@ const authReducer = createSlice({
     setAuthUserPending(state, action) {
       state.isLoading = action.payload;
     },
+    // isLoading(state, action) {
+    //   state.isLoading = action.payload;
+    // },
   },
 });
 
 export default authReducer.reducer;
 
-export const {
-  firstSetAuth,
-  getAuthUser,
-  isAuthUser,
-  setAuthUserPending,
-} = authReducer.actions;
+export const { firstSetAuth, getAuthUser, isAuthUser, setAuthUserPending } = authReducer.actions;
