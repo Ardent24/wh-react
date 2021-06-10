@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createLogger } from "redux-logger";
 
-import contactsReducer from "./reducers/contactsReducer";
+import contactsReducer, {responseLocation, responseTeam, responseUsers} from "./reducers/contactsReducer";
 import authReducer from "./reducers/authReducer";
 import calendarReducer, {
   getNowDate,
@@ -48,3 +48,9 @@ const createStoreDateNow = () => {
 };
 
 createStoreDateNow();
+
+
+const getUsers = store.dispatch(responseUsers());
+const getTeam = store.dispatch(responseTeam());
+const getLocation = store.dispatch(responseLocation());
+

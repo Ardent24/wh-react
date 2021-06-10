@@ -2,7 +2,7 @@ import React from "react";
 import cx from "classnames";
 import { useSelector } from "react-redux";
 
-import { cutZeroNum } from "../../../../modules/cutZeroNum";
+import { cutZeroInNum } from "../../../../modules/cutZeroInNum";
 import { cutMonth } from "../../../../modules/date";
 
 import CalendarDayHoliday from "./CalendarDayHoliday";
@@ -20,7 +20,7 @@ const CalendarDay = ({ date, dataDay }) => {
 
   const routeMonth = cutMonth(routerCalendar, "/");
   const propsMoth = cutMonth(date, "-");
-  const editNumDay = cutZeroNum(date);
+  const editNumDay = cutZeroInNum(date);
 
   const defultClass = "calendar-main__elem day";
   const dayClass = cx(defultClass, {

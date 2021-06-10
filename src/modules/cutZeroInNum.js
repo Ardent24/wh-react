@@ -1,4 +1,4 @@
-export function cutZeroNum(date) {
+export function cutZeroInNum(date) {
   const dateArray = date.split("-");
   const day = dateArray[2];
 
