@@ -1,36 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { useDispatch } from "react-redux";
-
 import Header from "./views/header/Header";
 import Layout from "./views/layout/Layout";
+import ModalContact from "./views/modal/Modal";
 import PageRouter from "./router/PageRouter";
 
-import { getUserApi } from "./api/authorizationAPI";
-import { isAuthUser, setAuthUserPending } from "./store/reducers/authReducer";
-
-const promiseUser = getUserApi();
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    promiseUser
-      .then((res) => {
-        const user = res.data.data;
-
-        dispatch(isAuthUser([user, true]));
-        dispatch(setAuthUserPending(false));
-      })
-      .catch(() => {
-        dispatch(isAuthUser([{}, false]));
-        dispatch(setAuthUserPending(false));
-      });
-  }, []);
-
   return (
     <Router>
       <div className="App">
+        <ModalContact />
         <Header />
         <Layout>
           <PageRouter />

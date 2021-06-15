@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import SvgEmoji from "../svg/SvgEmoji";
 import SvgNeutral from "../svg/SvgNeutral";
 

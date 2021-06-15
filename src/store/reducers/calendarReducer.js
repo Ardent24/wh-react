@@ -9,16 +9,13 @@ const calendarReducer = createSlice({
     routerCalendar: "",
   },
   reducers: {
-    getCalendarDays(state, action) {
-      state.dataCalendar = action.payload;
-    },
     setCalendarPending(state, action) {
       state.isLoading = action.payload;
     },
     setData(state, action) {
       state.data = action.payload;
     },
-    getNowDate(state, action) {
+    setNowDate(state, action) {
       state.dateNow = action.payload;
     },
     setRouterCalendar(state, action) {
@@ -30,9 +27,8 @@ const calendarReducer = createSlice({
 export default calendarReducer.reducer;
 
 export const {
-  getCalendarDays,
   setCalendarPending,
   setData,
-  getNowDate,
+  setNowDate,
   setRouterCalendar,
 } = calendarReducer.actions;

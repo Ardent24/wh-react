@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Alert, Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
-import { signInApi } from "../../api/authorizationAPI";
+import { signInApi } from "../../api/API";
 import { firstSetAuth } from "../../store/reducers/authReducer";
 
 import img from "../../assets/img/logo.png";

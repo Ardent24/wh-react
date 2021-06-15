@@ -1,10 +1,9 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
 import {
-  filteredUsersByValue,
+  setInputHeader,
   resetFiters,
-  stateFilterUsers,
 } from "../../../../store/reducers/contactsReducer";
 import ContactsMultiselectsBox from "./ContactsMultiselectsBox";
 import { ContactsContext } from "../../ContactsContext";
@@ -12,7 +11,6 @@ import { ContactsContext } from "../../ContactsContext";
 const ContactsHeader = () => {
   const [inp, setInp] = React.useState("");
 
-  const users = useSelector(stateFilterUsers);
   const dispatch = useDispatch();
   const inputRef = React.useRef();
   const setReset = React.useContext(ContactsContext).setStateResetFilters;
@@ -23,10 +21,8 @@ const ContactsHeader = () => {
   };
 
   React.useEffect(() => {
-    const array = users.filter((i) => i.firstName.toLowerCase().includes(inp));
-    console.log(array, inp);
-    dispatch(filteredUsersByValue(inp));
-  }, [inp]);
+    dispatch(setInputHeader(inp));
+  }, [dispatch, inp]);
 
   const isResetFilters = () => {
     inputRef.current.value = "";

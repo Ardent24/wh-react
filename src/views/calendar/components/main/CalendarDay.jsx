@@ -1,13 +1,10 @@
 import React from "react";
 import cx from "classnames";
 import { useSelector } from "react-redux";
-
 import { cutZeroInNum } from "../../../../modules/cutZeroInNum";
 import { cutMonth } from "../../../../modules/date";
-
 import CalendarDayHoliday from "./CalendarDayHoliday";
 import SvgClock from "../svg/SvgClock";
-
 
 const CalendarDay = ({ date, dataDay }) => {
   const weekday = +dataDay.weekday;
@@ -19,15 +16,15 @@ const CalendarDay = ({ date, dataDay }) => {
   const { dateNow, routerCalendar } = useSelector((state) => state.calendar);
 
   const routeMonth = cutMonth(routerCalendar, "/");
-  const propsMoth = cutMonth(date, "-");
+  const propsMonth = cutMonth(date, "-");
   const editNumDay = cutZeroInNum(date);
 
-  const defultClass = "calendar-main__elem day";
-  const dayClass = cx(defultClass, {
+  const defaultClass = "calendar-main__elem day";
+  const dayClass = cx(defaultClass, {
     "day-off": weekday === 6 || weekday === 7 || holidayType === "Holiday",
     "work-day": weekday > 0 && weekday < 6,
-    "day-now": dateNow.date === date && propsMoth === routeMonth,
-    "last-day": propsMoth !== routeMonth,
+    "day-now": dateNow.date === date && propsMonth === routeMonth,
+    "last-day": propsMonth !== routeMonth,
     holiday,
   });
 

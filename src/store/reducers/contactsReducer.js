@@ -1,18 +1,17 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
-  getLocationApi,
-  getTeamApi,
-  getUsersApi,
-} from "../../api/authorizationAPI";
+  createAsyncThunk,
+  createSlice,
+  createSelector,
+} from "@reduxjs/toolkit";
+import { getLocationApi, getTeamApi, getUsersApi } from "../../api/API";
+import { filteredBySelect, filteredByValue } from "../../modules/filtres";
 
 export const responseUsers = createAsyncThunk("users", async () => {
   return getUsersApi().then((res) => res.data.data.items);
 });
-
 export const responseTeam = createAsyncThunk("team", async () => {
   return getTeamApi().then((res) => res.data.data.items);
 });
-
 export const responseLocation = createAsyncThunk("location", async () => {
   return getLocationApi().then((res) => res.data.data.items);
 });
@@ -23,37 +22,18 @@ const contactsReducer = createSlice({
     users: [],
     team: [],
     location: [],
-    filterUsers: [],
     selectListTeam: [],
     selectListLocation: [],
+    findValue: [],
   },
   reducers: {
-    filteredUsersByValue: (state, action) => {
-      const array = state.filterUsers.filter((i) => i.firstName.toLowerCase().includes(action.payload))
-      state.filterUsers = [...array]
-      // state.value = action.payload
-        //state.filterUsers = action.payload
-    },
-    filteredUsersBySelect: (state, action) => {
-      state.filterUsers = state.filterUsers.filter((user) => {
-        let flag = false;
-
-        for (let i = 0; i < state.selectListLocation.length; i++) {
-          if (
-            state.selectListLocation[i].name.toLowerCase() ===
-            user.location.name.toLowerCase()
-          ) {
-            flag = true;
-            break;
-          }
-        }
-
-        return flag;
-      });
+    setInputHeader: (state, action) => {
+      state.findValue = action.payload;
     },
     resetFiters: (state) => {
       state.filterUsers = state.users;
-      state.selectList = [];
+      state.selectListTeam = [];
+      state.selectListLocation = [];
     },
     isSelectedList: (state, action) => {
       const { selectedList, title } = action.payload;
@@ -63,7 +43,6 @@ const contactsReducer = createSlice({
   extraReducers: {
     [responseUsers.fulfilled]: (state, action) => {
       state.users = action.payload;
-      state.filterUsers = action.payload;
     },
     [responseTeam.fulfilled]: (state, action) => {
       state.team = action.payload;
@@ -75,8 +54,7 @@ const contactsReducer = createSlice({
 });
 
 export const {
-  filteredUsersByValue,
-  filteredUsersBySelect,
+  setInputHeader,
   resetFiters,
   isSelectedList,
 } = contactsReducer.actions;
@@ -84,6 +62,26 @@ export const {
 export default contactsReducer.reducer;
 
 export const usersState = (state) => state.contacts.users;
-export const stateTeam = (state) => state.contacts.team;
 export const stateLocation = (state) => state.contacts.location;
-export const stateFilterUsers = (state) => state.contacts.filterUsers;
+export const stateTeam = (state) => state.contacts.team;
+export const statefindValue = (state) => state.contacts.findValue;
+export const stateSelectListLocation = (state) =>
+  state.contacts.selectListLocation;
+export const stateSelectListTeam = (state) => state.contacts.selectListTeam;
+
+export const filteredСontacts = createSelector(
+  [usersState, statefindValue, stateSelectListLocation, stateSelectListTeam],
+  (users, findValue, selectListLocation, selectListTeam) => {
+    const filteredLocation = !selectListLocation.length
+      ? users
+      : filteredBySelect(users, selectListLocation, "location");
+
+    const filteredTeam = !selectListTeam.length
+      ? filteredLocation
+      : filteredBySelect(filteredLocation, selectListTeam, "team");
+
+    const filteredValue = filteredByValue(filteredTeam, findValue);
+
+    return filteredValue;
+  }
+);

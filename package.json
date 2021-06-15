@@ -27,12 +27,12 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start ",
-    "build": "react-scripts build",
+    "start": "react-scripts start REACT_APP_ENV=development",
+    "build": "react-scripts build REACT_APP_ENV=production",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "yarn build REACT_APP_ENV=production",
+    "deploy": "gh-pages -d build REACT_APP_ENV=production"
   },
   "eslintConfig": {
     "extends": [

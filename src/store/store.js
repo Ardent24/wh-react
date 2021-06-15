@@ -1,41 +1,24 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { createLogger } from "redux-logger";
-
-import contactsReducer, {responseLocation, responseTeam, responseUsers} from "./reducers/contactsReducer";
-import authReducer from "./reducers/authReducer";
-import calendarReducer, {
-  getNowDate,
-  setRouterCalendar,
-} from "./reducers/calendarReducer";
-
+import { configureStore } from "@reduxjs/toolkit";
+import { rootReducer } from "./rootReducer";
+import { loggerStore } from "./loggerStore";
+import {
+  responseLocation,
+  responseTeam,
+  responseUsers,
+} from "./reducers/contactsReducer";
+import { isAuthUser, setAuthUserPending } from "./reducers/authReducer";
+import { setNowDate, setRouterCalendar } from "./reducers/calendarReducer";
 import { dateNow } from "../modules/date";
+import { getUserApi } from "../api/API";
 
-const logger = createLogger({
-  duration: true,
-  collapsed: true,
-  colors: {
-    title: () => "#139BFE",
-    prevState: () => "#1C5FAF",
-    action: () => "#149945",
-    nextState: () => "#A47104",
-    error: () => "#ff0005",
-  },
-});
+const isDevelopment = process.env.REACT_APP_ENV === "development";
 
-const rootReducer = combineReducers({
-  auth: authReducer,
-  calendar: calendarReducer,
-  contacts: contactsReducer,
-});
+const devMiddleware = (middleware) => middleware().concat(loggerStore);
+const prodMiddleware = (middleware) => middleware();
 
 export const store = configureStore({
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      immutableCheck: false,
-      serializableCheck: false,
-      thunk: true,
-    }).concat(logger),
-  devTools: true,
+  middleware: isDevelopment ? prodMiddleware : devMiddleware,
+  devTools: isDevelopment ? false : true,
   reducer: rootReducer,
 });
 
@@ -43,14 +26,26 @@ const createStoreDateNow = () => {
   const date = dateNow();
   const dateRoute = `${date.year}/${date.month}`;
 
-  store.dispatch(getNowDate(date));
+  store.dispatch(setNowDate(date));
   store.dispatch(setRouterCalendar(dateRoute));
 };
 
 createStoreDateNow();
 
+const promiseUser = getUserApi();
 
-const getUsers = store.dispatch(responseUsers());
-const getTeam = store.dispatch(responseTeam());
-const getLocation = store.dispatch(responseLocation());
+promiseUser
+  .then((res) => {
+    const user = res.data.data;
 
+    store.dispatch(isAuthUser([user, true]));
+    store.dispatch(setAuthUserPending(false));
+  })
+  .catch(() => {
+    store.dispatch(isAuthUser([{}, false]));
+    store.dispatch(setAuthUserPending(false));
+  });
+
+store.dispatch(responseUsers());
+store.dispatch(responseTeam());
+store.dispatch(responseLocation());

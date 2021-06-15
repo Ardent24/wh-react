@@ -7,7 +7,6 @@ import ContactsMain from "./components/main/ContactsMain";
 import "./styles/Contacts.scss";
 
 const Contacts = () => {
-
   return (
     <ContactsProvider>
       <div className="contacts">

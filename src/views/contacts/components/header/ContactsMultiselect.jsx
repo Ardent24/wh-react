@@ -3,28 +3,25 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { Multiselect } from "multiselect-react-dropdown";
 import { ContactsContext } from "../../ContactsContext";
-import {
-  isSelectedList,
-  filteredUsersBySelect,
-} from "../../../../store/reducers/contactsReducer";
+import { isSelectedList } from "../../../../store/reducers/contactsReducer";
 
 const ContactsMultiselect = ({ data, title }) => {
-  const selectRef = React.useRef();
-  const dispatch = useDispatch();
   const { stateResetFilters, setStateResetFilters } = React.useContext(
     ContactsContext
   );
+
+  const selectRef = React.useRef();
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     if (stateResetFilters) {
       selectRef.current.resetSelectedValues();
       setStateResetFilters(false);
     }
-  }, [stateResetFilters]);
+  }, [setStateResetFilters, stateResetFilters]);
 
   const onSelect = (selectedList) => {
     dispatch(isSelectedList({ selectedList, title }));
-    dispatch(filteredUsersBySelect());
   };
   const onRemove = (selectedList) => {
     dispatch(isSelectedList({ selectedList, title }));
@@ -40,6 +37,7 @@ const ContactsMultiselect = ({ data, title }) => {
         showArrow={true}
         onSelect={onSelect}
         onRemove={onRemove}
+        id={`id-${title}`}
       />
     </div>
   );

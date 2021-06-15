@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
-
 import Calendar from "../views/calendar/Calendar";
 import Login from "../views/login/Login";
 import Contacts from "../views/contacts/Contacts";

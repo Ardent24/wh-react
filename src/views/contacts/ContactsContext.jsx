@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { stateFilterUsers } from "../../store/reducers/contactsReducer";
+import { filteredСontacts } from "../../store/reducers/contactsReducer";
 
 export const ContactsContext = React.createContext();
 
 export const ContactsProvider = ({ children }) => {
-  const users = useSelector(stateFilterUsers);
+  const users = useSelector(filteredСontacts);
   const [stateResetFilters, setStateResetFilters] = React.useState(false);
 
   return (

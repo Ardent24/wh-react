@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { setRouterCalendar } from "../../../../store/reducers/calendarReducer";
-
 import SvgArrowRight from "../svg/SvgArrowRight";
 import SvgArrowLeft from "../svg/SvgArrowLeft";
 import CalendarDropdown from "./CalendarDropdown";
 
-import { incrementMounth, decrementMounth } from "../../../../modules/date";
+import { incrementMonth, decrementMonth } from "../../../../modules/date";
 
 import "../../styles/Calendar.scss";
 
@@ -19,13 +18,13 @@ const CalendarHeader = () => {
   const dispatch = useDispatch();
 
   const clcBtnIncrement = () => {
-    const newStateRoute = incrementMounth(stateRoute);
+    const newStateRoute = incrementMonth(stateRoute);
 
     dispatch(setRouterCalendar(newStateRoute));
     history.push(`/calendar/${newStateRoute}`);
   };
   const clcBtnDecrement = () => {
-    const newStateRoute = decrementMounth(stateRoute);
+    const newStateRoute = decrementMonth(stateRoute);
 
     dispatch(setRouterCalendar(newStateRoute));
     history.push(`/calendar/${newStateRoute}`);

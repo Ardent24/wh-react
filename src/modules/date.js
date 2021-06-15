@@ -1,4 +1,4 @@
-export const decrementMounth = (date) => {
+export const decrementMonth = (date) => {
   const arrayDate = date.split("/");
 
   arrayDate[1] = +arrayDate[1] - 1;
@@ -11,7 +11,7 @@ export const decrementMounth = (date) => {
   return arrayDate.join("/");
 };
 
-export const incrementMounth = (date) => {
+export const incrementMonth = (date) => {
   const arrayDate = date.split("/");
 
   arrayDate[1] = +arrayDate[1] + 1;

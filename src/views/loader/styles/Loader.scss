@@ -16,7 +16,7 @@
     &-wrap {
         width: 77.1429px;
         height: 77.1429px;
-        animation: 0.6s linear 0s infinite normal forwards running animation-12jek8e;
+        animation: 0.6s linear 0s infinite normal forwards running animation-loader;
         position: absolute;
     }
 
@@ -28,7 +28,7 @@
         opacity: 1;
         position: absolute;
         top: 25.7143px;
-        animation: 0.6s linear 0s infinite normal forwards running animation-12jek8e;
+        animation: 0.6s linear 0s infinite normal forwards running animation-loader;
         z-index: 2;
     }
 
@@ -41,10 +41,9 @@
         box-sizing: content-box;
         position: absolute;
     }
-
 }
 
-@keyframes animation-12jek8e {
+@keyframes animation-loader {
     100% {
         transform: rotate(360deg)
     }

@@ -1,0 +1,16 @@
+.modal-wrapper {
+    opacity: 1;
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.wrap{
+
+    &-item{
+        display: flex;
+        justify-content: space-between;
+    }
+}

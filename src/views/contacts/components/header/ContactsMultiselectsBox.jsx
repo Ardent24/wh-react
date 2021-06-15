@@ -13,7 +13,7 @@ const ContactsMultiselectsBox = () => {
   return (
     <div className="contacts-header__multiselects">
       <ContactsMultiselect title="Team" data={team} />
-      <ContactsMultiselect title="Location" data={location} />
+      <ContactsMultiselect title="Location" data={location}  />
     </div>
   );
 };
