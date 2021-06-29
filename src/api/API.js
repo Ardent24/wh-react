@@ -31,3 +31,11 @@ export const getDayApi = (year, month, day) =>
 export const getUsersApi = () => API.get(`/api/v1/users?limit=0`);
 export const getTeamApi = () => API.get(`/api/v1/teams?limit=0`);
 export const getLocationApi = () => API.get(`/api/v1/locations`);
+export const getAllTasksApi = () => API.get(`/api/v1/tasks?limit=0`);
+export const getTasksApi = (i) => API.get(`/api/v1/tasks?page=${i}&limit=10`);
+export const getPhaseFilteredTasksApi = (id) =>
+  API.get(`/api/v1/phases/${id}/tasks?limit=0`);
+export const postTasksApi = (data) => API.post("/api/v1/tasks", data);
+export const getPhasesApi = () => API.get("/api/v1/phases?limit=0");
+export const getHoursApi = () => API.get("/api/v1/hours");
+export const postHoursApi = (data) => API.post("/api/v1/hours", data);

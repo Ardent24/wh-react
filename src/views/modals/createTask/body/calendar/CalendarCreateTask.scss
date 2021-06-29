@@ -1,0 +1,22 @@
+@import "../../../../../styles/veriables";
+
+.nice-dates-popover {
+  max-width: 470px;
+}
+
+.nice-dates-navigation,
+.nice-dates-day {
+  color: $blue;
+}
+
+.nice-dates-day:after {
+  border: 2px solid $pink;
+}
+
+.nice-dates-day:hover .nice-dates-day_date {
+  color: $pink;
+}
+
+.nice-dates-day:before{
+  background-color: $pink;
+}

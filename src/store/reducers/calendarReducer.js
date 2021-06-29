@@ -32,3 +32,5 @@ export const {
   setNowDate,
   setRouterCalendar,
 } = calendarReducer.actions;
+
+export const stateDataNow = (state) => state.calendar.dateNow;

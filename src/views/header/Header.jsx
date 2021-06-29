@@ -29,6 +29,27 @@ const Header = () => {
         >
           Contacts
         </NavLink>
+        <NavLink
+          to="/tasks"
+          className="header-nav__link"
+          activeClassName="active"
+        >
+          Tasks
+        </NavLink>
+        <NavLink
+          to="/tasks-front"
+          className="header-nav__link"
+          activeClassName="active"
+        >
+          Tasks-front
+        </NavLink>
+        <NavLink
+          to="/hours"
+          className="header-nav__link"
+          activeClassName="active"
+        >
+          Hours
+        </NavLink>
       </nav>
     </header>
   );

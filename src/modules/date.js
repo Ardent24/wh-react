@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const decrementMonth = (date) => {
   const arrayDate = date.split("/");
 
@@ -80,3 +82,15 @@ export const cutMonth = (date, symbol) => {
 };
 
 export const cutDate = (date) => date.split("/");
+
+export const cutTasksDate = (date) => {
+  const str = date.slice(0, 10);
+
+  for (let i of str) {
+    if (i === "-") i = "/";
+  }
+
+  return str;
+};
+
+export const editDate = (date) => format(date, "yyyy-MM-dd");

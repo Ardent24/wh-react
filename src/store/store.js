@@ -10,6 +10,7 @@ import { isAuthUser, setAuthUserPending } from "./reducers/authReducer";
 import { setNowDate, setRouterCalendar } from "./reducers/calendarReducer";
 import { dateNow } from "../modules/date";
 import { getUserApi } from "../api/API";
+import { responsePhases} from "./reducers/tasksReducer";
 
 const isDevelopment = process.env.REACT_APP_ENV === "development";
 
@@ -49,3 +50,4 @@ promiseUser
 store.dispatch(responseUsers());
 store.dispatch(responseTeam());
 store.dispatch(responseLocation());
+store.dispatch(responsePhases());

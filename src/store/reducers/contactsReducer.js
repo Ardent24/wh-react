@@ -4,7 +4,7 @@ import {
   createSelector,
 } from "@reduxjs/toolkit";
 import { getLocationApi, getTeamApi, getUsersApi } from "../../api/API";
-import { filteredBySelect, filteredByValue } from "../../modules/filtres";
+import {filteredByName, filteredBySelect} from "../../modules/filtres";
 
 export const responseUsers = createAsyncThunk("users", async () => {
   return getUsersApi().then((res) => res.data.data.items);
@@ -30,8 +30,7 @@ const contactsReducer = createSlice({
     setInputHeader: (state, action) => {
       state.findValue = action.payload;
     },
-    resetFiters: (state) => {
-      state.filterUsers = state.users;
+    resetFilters: (state) => {
       state.selectListTeam = [];
       state.selectListLocation = [];
     },
@@ -80,7 +79,7 @@ export const filteredСontacts = createSelector(
       ? filteredLocation
       : filteredBySelect(filteredLocation, selectListTeam, "team");
 
-    const filteredValue = filteredByValue(filteredTeam, findValue);
+    const filteredValue = filteredByName(filteredTeam, findValue);
 
     return filteredValue;
   }

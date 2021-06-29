@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import {
   getDataUser,
-  isHandleShow,
+  handleModal, showContentContacts,
 } from "../../../../store/reducers/modalReducer";
 import { WH_URL } from "../../../../api/API";
 
@@ -12,13 +12,14 @@ const ContactsItem = ({ data }) => {
   const { firstName, lastName, team, location, photo } = data;
   const titleUser = `${lastName} ${firstName}`;
 
-  const showModal = () => {
-    dispatch(isHandleShow(true));
+  const openModal = () => {
+    dispatch(handleModal(true));
     dispatch(getDataUser(data));
+    dispatch(showContentContacts())
   };
 
   return (
-    <div className="contacts-main__item" onClick={showModal}>
+    <div className="contacts-main__item" onClick={openModal}>
       <img
         className="contacts-main__pic"
         src={`${WH_URL}/images/contacts/${photo}`}

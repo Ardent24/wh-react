@@ -1,21 +1,12 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  userState,
-  handleShowState,
-  isHandleShow,
-} from "../../store/reducers/modalReducer";
+import { useSelector } from "react-redux";
+import { userState } from "../../../store/reducers/modalReducer";
 
-import styles from "./Modal.module.scss";
-import "./Modal.scss";
+import styles from "./ContentContacts.module.scss";
 
-const ModalContact = () => {
+const ContentContacts = () => {
   const user = useSelector(userState);
-  const showState = useSelector(handleShowState);
-  const dispatch = useDispatch();
-
-  const handleClose = () => dispatch(isHandleShow(false));
 
   const nick = `${user.firstName} ${user.lastName}`;
   const phone = user.cellPhone;
@@ -25,7 +16,7 @@ const ModalContact = () => {
   const location = user.location?.name;
 
   return (
-    <Modal show={showState} onHide={handleClose} animation={false} centered>
+    <>
       <Modal.Header closeButton>
         <Modal.Title>{nick}</Modal.Title>
       </Modal.Header>
@@ -53,8 +44,8 @@ const ModalContact = () => {
           </p>
         </div>
       </Modal.Body>
-    </Modal>
+    </>
   );
 };
 
-export default ModalContact;
+export default ContentContacts;

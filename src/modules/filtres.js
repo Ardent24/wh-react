@@ -1,4 +1,4 @@
-export const filteredByValue = (array, value) => {
+export const filteredByName = (array, value) => {
   return array.filter((user) => {
     const searchName = user.firstName.toLowerCase().includes(value);
     const searchFamily = user.lastName.toLowerCase().includes(value);
@@ -24,3 +24,8 @@ export const filteredBySelect = (array, selectList, key) => {
     return flag;
   });
 };
+
+export const filteredByProject = (arr, val) =>
+  arr.filter((el) => el.phase.name.toLowerCase().includes(val));
+
+export const findIndex = (arr, id) => arr.findIndex((elem) => elem.id === id);

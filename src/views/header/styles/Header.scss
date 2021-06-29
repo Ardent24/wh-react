@@ -1,27 +1,27 @@
-@import '../../../styles/veriables';
+@import "../../../styles/veriables";
 
 .header {
-    padding: 1rem 4rem;
-    position: relative;
-    margin: 0 auto;
-    border-bottom: none;
-    box-shadow: 1px 1px 11px 4px #00000017;
-    z-index: 2;
+  padding: 1rem 4rem;
+  position: relative;
+  margin: 0 auto;
+  border-bottom: none;
+  box-shadow: 1px 1px 11px 4px #00000017;
+  z-index: 2;
 
-    &-logo {
-        max-width: 200px;
+  &-logo {
+    max-width: 200px;
+  }
+
+  &-nav {
+    &__link {
+      padding: 0.5rem;
+      color: #717273;
+      text-decoration: none;
+      font-size: 1.5rem;
+
+      &.active {
+        color: $blue;
+      }
     }
-
-    &-nav {
-        &__link {
-            padding: 0.5rem;
-            color: #717273;
-            text-underline: none;
-            font-size: 1.5rem;
-
-            &.active {
-                color: $blue;
-            }
-        }
-    }
+  }
 }

@@ -36,3 +36,5 @@ export const {
   isAuthUser,
   setAuthUserPending,
 } = authReducer.actions;
+
+export const stateIdUsers = (state) => state.auth.dataUser.id;
