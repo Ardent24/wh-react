@@ -6,7 +6,8 @@ import {
   changeCurrentPage,
   isSummPages,
   stateCurrentPage,
-  statePages, stateTotalPages,
+  statePages,
+  stateTotalPages,
 } from "../../../../store/reducers/tasksReducer";
 
 const TasksFrontPagination = styled(Pagination)`

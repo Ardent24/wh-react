@@ -5,7 +5,10 @@ import { Form } from "react-bootstrap";
 import { postTasksApi } from "../../../api/API";
 import { editDate } from "../../../modules/date";
 import { handleModal } from "../../../store/reducers/modalReducer";
-import {responseAllTasks, responseTasks} from "../../../store/reducers/tasksReducer"
+import {
+  responseAllTasks,
+  responseTasks,
+} from "../../../store/reducers/tasksReducer";
 import { stateIdUsers } from "../../../store/reducers/authReducer";
 import CreateTaskFooter from "./footer/CreateTaskFooter";
 import CreateTaskHeader from "./header/CreateTaskHeader";
@@ -29,7 +32,7 @@ const ContentCreateTask = () => {
 
     delete data.date;
 
-    const newData = { ["task"]: { ...data } };
+    const newData = { task: { ...data } };
 
     newData.task.user = String(isIdUser);
     newData.task.estimationTime = +newData.task.estimationTime;

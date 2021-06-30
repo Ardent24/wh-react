@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { addRow, stateListRow } from "../../../../store/reducers/hourReducer";
+import { useSelector } from "react-redux";
+import { statePhases } from "../../../../store/reducers/tasksReducer";
 
 const Footer = styled.footer`
   margin-top: 4rem;
@@ -12,13 +12,15 @@ const Footer = styled.footer`
   justify-content: space-between;
 `;
 
-const HoursFooter = ({append}) => {
-  const dispatch = useDispatch();
+const HoursFooter = ({ append }) => {
+  const task = { name: "tasks" };
+  const phase = useSelector(statePhases)[0];
+  const date = new Date().toISOString();
+  const comment = null;
+  const idUser = useSelector((state) => state.auth.dataUser.id);
 
   const handlerRow = () => {
-    //dispatch(addRow());
-
-    append({})
+    append({ phase, task, date, comment, id: idUser });
   };
 
   return (

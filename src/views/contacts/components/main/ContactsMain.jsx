@@ -1,8 +1,6 @@
 import React from "react";
-
 import { ContactsContext } from "../../ContactsContext";
 import ContactsItem from "./ContactsItem";
-
 
 const ContactsMain = () => {
   const users = React.useContext(ContactsContext).users;

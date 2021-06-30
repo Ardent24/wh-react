@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Alert, Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-
 import { signInApi } from "../../api/API";
 import { firstSetAuth } from "../../store/reducers/authReducer";
 
@@ -50,7 +49,6 @@ const Login = () => {
             className=""
             {...register("username", {
               required: true,
-              // pattern: { value: /\S+@\S+\.\S+/ },
             })}
           />
           <Form.Text className={dangerShowEmail}>

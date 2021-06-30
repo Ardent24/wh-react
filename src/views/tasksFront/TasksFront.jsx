@@ -16,6 +16,7 @@ const TasksFront = () => {
 
   React.useEffect(() => {
     dispatch(responseAllTasks());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

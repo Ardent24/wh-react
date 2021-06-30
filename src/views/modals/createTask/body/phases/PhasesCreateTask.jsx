@@ -25,7 +25,9 @@ const PhasesCreateTask = ({ register }) => {
       >
         <option>Phases</option>
         {phases.map((item) => (
-          <option key={`id-${item.id}`} value={item.id}>{item.name}</option>
+          <option key={`id-${item.id}`} value={item.id}>
+            {item.name}
+          </option>
         ))}
       </Form.Control>
     </Form.Group>

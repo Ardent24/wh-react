@@ -11,7 +11,6 @@ import {
 } from "../../../../../store/reducers/tasksReducer";
 
 import "react-nice-dates/build/style.css";
-import { editDate } from "../../../../../modules/date";
 
 const DateFilters = () => {
   const resetDate = useSelector(stateResetFilters);
@@ -23,7 +22,7 @@ const DateFilters = () => {
     setStartDate(null);
     setEndDate(null);
     dispatch(changeFlagResetFilters(false));
-  }, [resetDate]);
+  }, [dispatch, resetDate]);
 
   React.useEffect(() => {
     if (startDate) {
@@ -36,7 +35,7 @@ const DateFilters = () => {
 
       dispatch(setFilterEndDate(time));
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate, dispatch]);
 
   return (
     <>

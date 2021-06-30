@@ -6,7 +6,6 @@ import {
   handleModal,
   showContentCreateTask,
 } from "../../../../store/reducers/modalReducer";
-import { responseTasks } from "../../../../store/reducers/tasksReducer";
 
 const Header = styled.header`
   display: flex;

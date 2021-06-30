@@ -36,7 +36,7 @@ const BtnPlus = () => {
   };
 
   return (
-    <Button onClick={createTask}>
+    <Button onClick={createTask} type="button">
       <SvgPlus />
     </Button>
   );

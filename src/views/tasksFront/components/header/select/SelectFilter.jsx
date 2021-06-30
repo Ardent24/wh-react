@@ -15,6 +15,7 @@ const SelectFilter = () => {
 
   const handlerTasks = (ev) => {
     const val = ev.target.value.toLowerCase();
+
     dispatch(setFilterSelect(val));
   };
 

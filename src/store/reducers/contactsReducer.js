@@ -4,7 +4,7 @@ import {
   createSelector,
 } from "@reduxjs/toolkit";
 import { getLocationApi, getTeamApi, getUsersApi } from "../../api/API";
-import {filteredByName, filteredBySelect} from "../../modules/filtres";
+import { filteredByName, filteredBySelect } from "../../modules/filtres";
 
 export const responseUsers = createAsyncThunk("users", async () => {
   return getUsersApi().then((res) => res.data.data.items);

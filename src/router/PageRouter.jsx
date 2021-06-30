@@ -13,7 +13,7 @@ const PageRouter = () => {
 
   return (
     <Switch>
-      {location === "/" && <Redirect to="/calendar/" />}
+      {location === "/wh-react" && <Redirect to="/calendar/" />}
       <Route path="/login" exact component={Login} />
       <PrivateRoute path="/calendar" exact component={Calendar} />
       <PrivateRoute path="/contacts" exact component={Contacts} />

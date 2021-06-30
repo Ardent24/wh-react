@@ -1,9 +1,13 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const HoursRowStatus = ({ register }) => {
+const HoursRowStatus = ({ register, index, status }) => {
   return (
-    <Form.Control as="select" {...register("currentStatus")}>
+    <Form.Control
+      as="select"
+      {...register(`items[${index}].status`)}
+      defaultValue={status}
+    >
       <option value="IN_PROGRESS">In progress</option>
       <option value="DONE">Done</option>
       <option value="NEED_FEEDBACK">Need feedback</option>

@@ -12,6 +12,7 @@ const SearchFilter = () => {
 
   const handlerTasks = (ev) => {
     const val = ev.target.value.toLowerCase();
+
     dispatch(setFilterValue(val));
   };
 

@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import {
   getDataUser,
-  handleModal, showContentContacts,
+  handleModal,
+  showContentContacts,
 } from "../../../../store/reducers/modalReducer";
 import { WH_URL } from "../../../../api/API";
 
@@ -15,7 +16,7 @@ const ContactsItem = ({ data }) => {
   const openModal = () => {
     dispatch(handleModal(true));
     dispatch(getDataUser(data));
-    dispatch(showContentContacts())
+    dispatch(showContentContacts());
   };
 
   return (

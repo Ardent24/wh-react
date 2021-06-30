@@ -1,35 +1,29 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { editRowCurrentTask } from "../../../../../store/reducers/hourReducer";
+import { useSelector } from "react-redux";
+import { stateTasks } from "../../../../../store/reducers/hourReducer";
 
-const HoursRowTasks = ({ register, indexRow, listRow }) => {
-  const dispatch = useDispatch();
-
-  const tasks = listRow[indexRow].tasks;
-  const value = listRow[indexRow].currentTask;
-
-  const changeTasks = (ev) => {
-    const value = ev.target.value.toLowerCase();
-    dispatch(editRowCurrentTask({ value, indexRow }));
-  };
+const HoursRowTasks = ({ register, task, index }) => {
+  const state = useSelector(stateTasks);
+  const tasks = state[index] ? state[index] : [];
 
   return (
     <Form.Control
       as="select"
-      {...register("task", {
+      {...register(`items[${index}].task`, {
         required: true,
-        validate: (value) => value == "tasks",
       })}
-      value={value.toLowerCase()}
-      onChange={changeTasks}
+      defaultValue={task?.name}
     >
-      <option value="tasks">tasks</option>
-      {tasks.map((elem) => (
-        <option value={elem.name.toLowerCase()} key={`key-${elem.id}`}>
-          {elem.name}
-        </option>
-      ))}
+      {<option value={task}>{task?.name}</option>}
+      {tasks.map(
+        (item) =>
+          item.name !== task.name && (
+            <option value={item.id} key={item.id}>
+              {item.name}
+            </option>
+          )
+      )}
     </Form.Control>
   );
 };

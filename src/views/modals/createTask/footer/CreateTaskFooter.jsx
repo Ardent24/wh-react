@@ -15,11 +15,7 @@ const CreateTaskFooter = ({ disabled }) => {
       <Button variant="secondary" onClick={handleClose}>
         Close
       </Button>
-      <Button
-        variant="primary"
-        type="submit"
-        disabled={disabled}
-      >
+      <Button variant="primary" type="submit" disabled={disabled}>
         Save
       </Button>
     </Modal.Footer>

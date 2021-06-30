@@ -1,64 +1,63 @@
 .contacts {
-    min-height: 100vh;
+  min-height: 100vh;
 
-    &-header {
-        margin-top: 2rem;
+  &-header {
+    margin-top: 2rem;
 
-        & button {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            border-top-right-radius: .25rem;
-            border-top-right-radius: .25rem;
-            z-index: 1;
-        }
-
-        &__multiselects {
-            margin-top: 1rem;
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 4rem;
-            flex-wrap: wrap;
-        }
-
-        &__select {
-            flex: 0 0 420px;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
+    & button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 0.25rem;
+      border-top-right-radius: 0.25rem;
+      z-index: 1;
     }
 
-    &-main {
-        &__wrapper {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        &__item {
-            flex: 0 0 400px;
-            max-width: 400px;
-            background-color: transparent;
-            display: flex;
-            align-items: center;
-            margin: 1rem;
-            opacity: 1;
-            transition: opacity .5s;
-
-            &:hover {
-                cursor: pointer;
-                opacity: 0.6;
-            }
-        }
-
-        &__pic {
-            margin-right: 1rem;
-            max-height: 140px;
-        }
-
-        &__data {
-
-        }
+    &__multiselects {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
     }
+
+    &__select {
+      flex: 0 0 420px;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &-main {
+    &__wrapper {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    &__item {
+      flex: 0 0 400px;
+      max-width: 400px;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      margin: 1rem;
+      opacity: 1;
+      transition: opacity 0.5s;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.6;
+      }
+    }
+
+    &__pic {
+      margin-right: 1rem;
+      max-height: 140px;
+    }
+
+    &__data {
+    }
+  }
 }

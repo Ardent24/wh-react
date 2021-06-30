@@ -7,8 +7,7 @@ import HoursFooter from "./components/footer/HoursFooter";
 import HoursHeader from "./components/header/HoursHeader";
 import HoursRowList from "./components/main/HoursRowList";
 import { stateDataNow } from "../../store/reducers/calendarReducer";
-import { responseHours, stateHours } from "../../store/reducers/hourReducer";
-import { getHoursApi } from "../../api/API";
+import {responseHours, stateHours} from "../../store/reducers/hourReducer";
 
 const Wrapper = styled.div`
   margin-top: 2rem;
@@ -20,24 +19,8 @@ const Title = styled.h2`
 `;
 
 const Hours = () => {
-  //const hours = useSelector(stateHours);
+  const hours = useSelector(stateHours);
   const dispatch = useDispatch();
-
-  const a = {amount: 111}
-
-  const [bb, setBB] = React.useState({});
-
-  React.useEffect(() => {
-    getHoursApi().then((r) => setBB(r.data.data.items));
-    if (!bb) {
-      //setBB(responseHours())
-    }
-
-    // dispatch(responseHours());
-  }, []);
-  console.log();
-
-  //console.log(hours[0]?.amount);
 
   const date = useSelector(stateDataNow).date;
   const {
@@ -45,20 +28,31 @@ const Hours = () => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm({
-    defaultValues: {
-      //items: [{ ...(bb && { amount: bb[0]?.amount }) }],
-      items:[{amount: a.amount}]
-    },
-  });
+    reset,
+  } = useForm();
   const { fields, append, remove } = useFieldArray({
     name: "items",
     control,
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    const obj = data.items;
+
+    for (let item of obj) {
+      item.amount = +item.amount;
+    }
+
+    console.log(obj);
   };
+
+  React.useEffect(() => {
+    dispatch(responseHours());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  React.useEffect(() => {
+    reset({ items: [...hours] });
+  }, [hours, reset]);
 
   return (
     <Wrapper>
@@ -72,33 +66,12 @@ const Hours = () => {
               errors={errors}
               fields={fields}
               remove={remove}
+              control={control}
             />
           </tbody>
         </Table>
-
-        {/*{fields.map(({ id, name, type, amount }, index) => {*/}
-        {/*  return (*/}
-        {/*    <div key={id}>*/}
-        {/*      <input {...register(`items[${index}].name`)} />*/}
-
-        {/*      <button type="button" onClick={() => remove(index)}>*/}
-        {/*        Remove*/}
-        {/*      </button>*/}
-        {/*    </div>*/}
-        {/*  );*/}
-        {/*})}*/}
         <HoursFooter append={append} />
       </Form>
-
-      {/*<Form onSubmit={handleSubmit(onSubmit)}>*/}
-      {/*  <Table striped bordered>*/}
-      {/*    <HoursHeader />*/}
-      {/*    <tbody>*/}
-      {/*      <HoursRowList register={register} errors={errors} />*/}
-      {/*    </tbody>*/}
-      {/*  </Table>*/}
-      {/*  <HoursFooter />*/}
-      {/*</Form>*/}
     </Wrapper>
   );
 };

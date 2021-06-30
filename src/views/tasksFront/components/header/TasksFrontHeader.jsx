@@ -11,7 +11,6 @@ import SearchFilter from "./search/SearchFilter";
 import ResetFilters from "./reset/ResetFilters";
 import DateFilters from "./date/DateFilter";
 import SelectFilter from "./select/SelectFilter";
-import { responseAllTasks } from "../../../../store/reducers/tasksReducer";
 
 const Header = styled.header`
   display: flex;
