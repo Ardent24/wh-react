@@ -27,3 +27,5 @@ export const filteredBySelect = (array, selectList, key) => {
 
 export const filteredByProject = (arr, val) =>
   arr.filter((el) => el.phase.name.toLowerCase().includes(val));
+
+export const findIndexArray = (arr, val) => arr.findIndex((elem) => elem.id === val);

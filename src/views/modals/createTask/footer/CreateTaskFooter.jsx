@@ -5,10 +5,7 @@ import { handleModal } from "../../../../store/reducers/modalReducer";
 
 const CreateTaskFooter = ({ disabled }) => {
   const dispatch = useDispatch();
-
-  const handleClose = () => {
-    dispatch(handleModal(false));
-  };
+  const handleClose = () => dispatch(handleModal(false));
 
   return (
     <Modal.Footer>

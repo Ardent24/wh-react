@@ -21,7 +21,6 @@ export const API = axios.create({
 });
 
 export const signInApi = (data) => API.post("/api/security/login", data);
-export const logOutApi = () => API.post("/api/security/logout");
 export const getUserApi = () => API.get("/api/v1/user/current");
 export const getCalendarApi = () => API.get("/api/v1/calendar");
 export const getMonthApi = (year, month) =>
@@ -39,3 +38,9 @@ export const postTasksApi = (data) => API.post("/api/v1/tasks", data);
 export const getPhasesApi = () => API.get("/api/v1/phases?limit=0");
 export const getHoursApi = () => API.get("/api/v1/hours");
 export const postHoursApi = (data) => API.post("/api/v1/hours", data);
+export const updateHoursApi = (id, data) =>
+  API.put(`/api/v1/hours/${id}`, data);
+export const deleteHoursApi = (id) => API.delete(`/api/v1/hours/${id}`);
+export const addHoursApi = (data) => API.post("/api/v1/hours", data);
+export const getNowTasksApi = (id, date) =>
+  API.get(`/api/v1/phases/${id}/tasks?limit=0&date=${date}`);

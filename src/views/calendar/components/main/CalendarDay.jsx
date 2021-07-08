@@ -1,8 +1,10 @@
 import React from "react";
 import cx from "classnames";
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { cutZeroInNum } from "../../../../modules/cutZeroInNum";
 import { cutMonth } from "../../../../modules/date";
+import { stateCalendar } from "../../../../store/reducers/calendarReducer";
 import CalendarDayHoliday from "./CalendarDayHoliday";
 import SvgClock from "../svg/SvgClock";
 
@@ -13,7 +15,7 @@ const CalendarDay = ({ date, dataDay }) => {
   const holidayType = holiday ? holiday.type : "";
   const hours = dataDay.hours ? dataDay.hours : "0";
 
-  const { dateNow, routerCalendar } = useSelector((state) => state.calendar);
+  const { dateNow, routerCalendar } = useSelector(stateCalendar);
 
   const routeMonth = cutMonth(routerCalendar, "/");
   const propsMonth = cutMonth(date, "-");
@@ -38,6 +40,11 @@ const CalendarDay = ({ date, dataDay }) => {
       <CalendarDayHoliday holidayType={holidayType} />
     </div>
   );
+};
+
+CalendarDay.propTypes = {
+  date: PropTypes.string.isRequired,
+  dataDay: PropTypes.object.isRequired,
 };
 
 export default CalendarDay;

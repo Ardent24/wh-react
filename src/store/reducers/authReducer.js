@@ -38,3 +38,5 @@ export const {
 } = authReducer.actions;
 
 export const stateIdUsers = (state) => state.auth.dataUser.id;
+export const stateIsAuth = (state) => state.auth.isAuthUser;
+export const stateIsAuthLoading = (state) => state.auth.isLoading;

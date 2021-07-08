@@ -2,10 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { DropdownButton } from "react-bootstrap";
 import { changeMonth, cutDate } from "../../../../modules/date";
+import { stateRouterCalendar } from "../../../../store/reducers/calendarReducer";
 import CalendarItem from "./CalendarItem";
 
 const CalendarDropdown = () => {
-  const routerCalender = useSelector((state) => state.calendar.routerCalendar);
+  const routerCalender = useSelector(stateRouterCalendar);
   const arrayRouterCalendar = cutDate(routerCalender);
 
   const year = +arrayRouterCalendar[0];

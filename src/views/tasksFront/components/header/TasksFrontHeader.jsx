@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux"
+import { Col, FormGroup, InputGroup, Row } from "react-bootstrap";
 import {
   handleModal,
   showContentCreateTask,
 } from "../../../../store/reducers/modalReducer";
 import TasksPlus from "../../../tasks/components/svg/TasksPlus";
-import { Col, FormGroup, InputGroup, Row } from "react-bootstrap";
 import SearchFilter from "./search/SearchFilter";
 import ResetFilters from "./reset/ResetFilters";
 import DateFilters from "./date/DateFilter";

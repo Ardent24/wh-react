@@ -2,18 +2,19 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { setRouterCalendar } from "../../../../store/reducers/calendarReducer";
+import {
+  setRouterCalendar,
+  stateRouterCalendar,
+} from "../../../../store/reducers/calendarReducer";
+import { incrementMonth, decrementMonth } from "../../../../modules/date";
 import SvgArrowRight from "../svg/SvgArrowRight";
 import SvgArrowLeft from "../svg/SvgArrowLeft";
 import CalendarDropdown from "./CalendarDropdown";
 
-import { incrementMonth, decrementMonth } from "../../../../modules/date";
-
 import "../../styles/Calendar.scss";
 
 const CalendarHeader = () => {
-  const stateRoute = useSelector((state) => state.calendar.routerCalendar);
-
+  const stateRoute = useSelector(stateRouterCalendar);
   const history = useHistory();
   const dispatch = useDispatch();
 

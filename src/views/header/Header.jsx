@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import img from "../../assets/img/logo.png";
+
 import "./styles/Header.scss";
 
 const Header = () => {
@@ -43,7 +44,7 @@ const Header = () => {
           Tasks-front
         </NavLink>
         <NavLink
-          to="/hours"
+          to="/hoursDay"
           className="header-nav__link"
           activeClassName="active"
         >

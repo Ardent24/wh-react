@@ -5,8 +5,8 @@ import Login from "../views/login/Login";
 import Contacts from "../views/contacts/Contacts";
 import Tasks from "../views/tasks/Tasks";
 import TasksFront from "../views/tasksFront/TasksFront";
-import Hours from "../views/hours/Hours";
 import PrivateRoute from "./PrivateRoute";
+import HoursDay from "../views/hoursDay/HoursDay";
 
 const PageRouter = () => {
   const location = useLocation().pathname;
@@ -19,7 +19,7 @@ const PageRouter = () => {
       <PrivateRoute path="/contacts" exact component={Contacts} />
       <PrivateRoute path="/tasks" exact component={Tasks} />
       <PrivateRoute path="/tasks-front" exact component={TasksFront} />
-      <PrivateRoute path="/hours" exact component={Hours} />
+      <PrivateRoute path="/hoursDay" exact component={HoursDay} />
       <PrivateRoute path="/calendar/:year/:month" exact component={Calendar} />
     </Switch>
   );

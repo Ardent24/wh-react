@@ -6,7 +6,7 @@ import PageRouter from "./router/PageRouter";
 import Modals from "./views/modals/Modals";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import './styles/global.scss'
+import "./styles/global.scss";
 
 export default function App() {
   return (

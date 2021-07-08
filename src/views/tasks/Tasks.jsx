@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { responseTasks } from "../../store/reducers/tasksReducer";
 import TasksHeader from "./components/header/TasksHeader";
 import TasksMain from "./components/main/TasksMain";
 import TasksPagination from "./components/pagination/TasksPagination";
-import { responseTasks } from "../../store/reducers/tasksReducer";
-import { useDispatch } from "react-redux";
 
 const Wrapper = styled.main`
   margin-top: 2rem;

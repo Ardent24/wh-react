@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import CalendarWeek from "./CalendarWeek";
 import CalendarMonth from "./CalendarMonth";
 
@@ -14,6 +15,10 @@ const CalendarMain = ({ dataDays }) => {
       </div>
     </main>
   );
+};
+
+CalendarMain.propTypes = {
+  dataDays: PropTypes.object.isRequired,
 };
 
 export default CalendarMain;
