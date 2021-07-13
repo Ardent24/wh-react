@@ -1,7 +1,7 @@
 import React from "react";
-import { Pagination } from "react-bootstrap";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import { Pagination } from "react-bootstrap";
 import {
   changeCurrentPage,
   responseTasks,
@@ -29,7 +29,7 @@ const TaskPagination = () => {
   const handlerPages = (ev) => changePage(ev.target.id);
   const handlerPageNext = () => {
     let id = currentPage + 1;
-    if (id >= pages.length) id = pages.length - 1;
+    if (id === totalPages) id = totalPages - 1;
 
     changePage(id);
   };
@@ -40,7 +40,7 @@ const TaskPagination = () => {
     changePage(id);
   };
   const handlerPageFirst = () => changePage(0);
-  const handlerPageLast = () => changePage(totalPages);
+  const handlerPageLast = () => changePage(totalPages - 1);
 
   return (
     <TasksPagination>

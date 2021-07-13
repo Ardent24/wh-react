@@ -10,8 +10,8 @@ const TdColumn = styled.td`
 
 const TasksFrontItem = ({ data }) => {
   const status = data.currentStatus;
-  const estimition = data.estimitionTime;
-  const phase = data.phase.name;
+  const estimition = data.estimationTime;
+  const phase = data?.phase?.name;
   const { startDate, endDate, name, workedHours, description } = data;
 
   return (

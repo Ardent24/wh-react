@@ -4,7 +4,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import { getAllTasksApi, getPhasesApi, getTasksApi } from "../../api/API";
-import { filteredByProject } from "../../modules/filtres";
+import { filteredByProject, filteredByValue } from "../../modules/filtres";
 
 export const responseTasks = createAsyncThunk("tasks", async (data) => {
   return getTasksApi(data).then((res) => res.data.data);
@@ -15,6 +15,8 @@ export const responseAllTasks = createAsyncThunk("allTasks", async () => {
 export const responsePhases = createAsyncThunk("phases", async () => {
   return getPhasesApi().then((res) => res.data.data.items);
 });
+
+const LIST_PAGES = 10;
 
 const emptyArrayIsPages = [
   { id: 0 },
@@ -44,17 +46,33 @@ const tasksReducer = createSlice({
   },
   reducers: {
     changeCurrentPage: (state, action) => {
-      const id = +action.payload;
-      state.currentPage = id;
+      const maxPages = state.totalPages - 1;
+      const id = (state.currentPage = +action.payload);
 
-      state.pages = state.pages.map((elem, i) => {
-        elem.id = id + i;
-        return elem;
-      });
+      if (id > maxPages - 5) {
+        state.pages = state.pages.map((elem, i, arr) => {
+          elem.id = id - arr.length + 1 + i;
+
+          return elem;
+        });
+      }
+
+      if (id < maxPages - 5) {
+        state.pages = state.pages.map((elem, i) => {
+          elem.id = id + i;
+
+          return elem;
+        });
+      }
     },
     isSummPages: (state) => {
-      state.lastPag = state.currentPage === 0 ? 10 : state.currentPage * 10;
-      state.prevPag = state.lastPag < 10 ? 0 : state.lastPag - 10;
+      if (state.currentPage === 0) {
+        state.prevPag = 0;
+        state.lastPag = LIST_PAGES;
+      } else {
+        state.prevPag = state.currentPage * LIST_PAGES;
+        state.lastPag = state.prevPag + LIST_PAGES;
+      }
     },
     isResetedFilters: (state) => {
       state.resetFilters = true;
@@ -78,18 +96,22 @@ const tasksReducer = createSlice({
     setFilterEndDate: (state, action) => {
       state.filterEndDate = action.payload;
     },
+    addNewTask: (state, action) => {
+      state.items.unshift(action.payload);
+      state.allItems.unshift(action.payload);
+    },
   },
   extraReducers: {
     [responseTasks.fulfilled]: (state, action) => {
       const { items, count } = action.payload;
-      const lengthArray = Math.ceil(count / 10);
+      const lengthArray = Math.ceil(count / LIST_PAGES);
 
       state.totalPages = lengthArray;
       state.items = items;
     },
     [responseAllTasks.fulfilled]: (state, action) => {
       const { items, count } = action.payload;
-      const lengthArray = Math.ceil(count / 10);
+      const lengthArray = Math.ceil(count / LIST_PAGES);
 
       state.totalPages = lengthArray;
       state.allItems = items;
@@ -110,6 +132,7 @@ export const {
   setFilterEndDate,
   changeFlagResetFilters,
   isSummPages,
+  addNewTask,
 } = tasksReducer.actions;
 
 export default tasksReducer.reducer;
@@ -135,20 +158,14 @@ export const isFilteredTasks = createSelector(
     stateFilterSelect,
     stateFilterStartDate,
     stateFilterEndDate,
-    statePrevPag,
-    stateLastPag,
   ],
-  (tasks, value, select, startDate, endDate, prevPag, lastPag) => {
-    const filteredPagination = tasks.filter(
-      (_, i) => i > prevPag && i <= lastPag
-    );
-
-    const filteredByValue = filteredByProject(filteredPagination, value);
+  (tasks, value, select, startDate, endDate) => {
+    const filteredByInput = filteredByValue(tasks, value);
 
     const filteredBySelect =
       select === "all"
-        ? filteredByValue
-        : filteredByProject(filteredByValue, select);
+        ? filteredByInput
+        : filteredByProject(filteredByInput, select);
 
     const filteredByStart = startDate
       ? filteredBySelect.filter((el) => el.startDate >= startDate)

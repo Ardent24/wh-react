@@ -11,8 +11,11 @@ import CreateRowPhases from "./components/body/phases/CreateRowPhases";
 import CreateRowTasks from "./components/body/tasks/CreateRowTasks";
 import { stateIdUsers } from "../../../store/reducers/authReducer";
 import { addHoursApi, getNowTasksApi, getPhasesApi } from "../../../api/API";
-import { addRowItem } from "../../../store/reducers/hourReducer";
-import { handleModal } from "../../../store/reducers/modalReducer";
+import { responseHours } from "../../../store/reducers/hourReducer";
+import {
+  handleModal,
+  resetContentModal,
+} from "../../../store/reducers/modalReducer";
 
 const ContentCreateRow = () => {
   const dispatch = useDispatch();
@@ -58,20 +61,22 @@ const ContentCreateRow = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSubmit = (ev) => {
+  const onSubmit = async (ev) => {
     ev.preventDefault();
 
-    const hour = {};
-    hour.amount = dataRow.amount;
-    hour.comment = "";
-    hour.comment = "IN_PROGRESS";
-    hour.user = `${dataRow.user}`;
-    hour.date = date;
-    hour.task = `${dataRow.task.id}`;
+    const hour = {
+      amount: dataRow.amount,
+      comment: "IN_PROGRESS",
+      user: `${idUser}`,
+      date,
+      task: `${dataRow.task.id}`,
+    };
 
-    addHoursApi({ hour });
-    dispatch(addRowItem(hour));
+    await addHoursApi({ hour });
+    await dispatch(responseHours());
+
     dispatch(handleModal(false));
+    dispatch(resetContentModal());
   };
 
   return (

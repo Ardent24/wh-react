@@ -1,32 +1,27 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
 import {
   setInputHeader,
-  resetFiters,
+  resetFilters, statefindValue,
 } from "../../../../store/reducers/contactsReducer";
 import ContactsMultiselectsBox from "./ContactsMultiselectsBox";
 import { ContactsContext } from "../../ContactsContext";
 
 const ContactsHeader = () => {
-  const [inp, setInp] = React.useState("");
-
+  const val = useSelector(statefindValue);
   const dispatch = useDispatch();
-  const inputRef = React.useRef();
   const setReset = React.useContext(ContactsContext).setStateResetFilters;
 
   const isFilterUsers = (ev) => {
     const value = ev.target.value.toLowerCase();
-    setInp(value);
+
+    dispatch(setInputHeader(value));
   };
 
-  React.useEffect(() => {
-    dispatch(setInputHeader(inp));
-  }, [dispatch, inp]);
-
   const isResetFilters = () => {
-    inputRef.current.value = "";
-    dispatch(resetFiters());
+    dispatch(setInputHeader(''));
+    dispatch(resetFilters());
     setReset(true);
   };
 
@@ -37,7 +32,7 @@ const ContactsHeader = () => {
           placeholder="Search"
           aria-label="Recipient's username"
           onChange={isFilterUsers}
-          ref={inputRef}
+          value={val}
         />
         <Button
           variant="outline-secondary"

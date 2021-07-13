@@ -2,19 +2,25 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  responsePhases,
   setFilterSelect,
   stateFilterSelect,
   statePhases,
 } from "../../../../../store/reducers/tasksReducer";
 import "./SelectFilter.scss";
+import { store } from "../../../../../store/store";
 
 const SelectFilter = () => {
+  React.useEffect(() => {
+    store.dispatch(responsePhases());
+  }, []);
+
   const value = useSelector(stateFilterSelect);
   const phases = useSelector(statePhases);
   const dispatch = useDispatch();
 
   const handlerTasks = (ev) => {
-    const val = ev.target.value.toLowerCase();
+    const val = ev.target.value;
 
     dispatch(setFilterSelect(val));
   };
@@ -24,7 +30,7 @@ const SelectFilter = () => {
       as="select"
       className={"select-tasks"}
       onChange={handlerTasks}
-      value={value}
+      value={value.toLowerCase()}
     >
       <option value="all">All</option>
       {phases.map((elem) => (

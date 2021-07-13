@@ -1,14 +1,22 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { statePhases } from "../../../../../store/reducers/tasksReducer";
+import {
+  responsePhases,
+  statePhases,
+} from "../../../../../store/reducers/tasksReducer";
 import { Form } from "react-bootstrap";
 import styled from "styled-components";
+import { store } from "../../../../../store/store";
 
 const Required = styled.span`
   color: #ee4586;
 `;
 
 const PhasesCreateTask = ({ register }) => {
+  React.useEffect(() => {
+    store.dispatch(responsePhases());
+  }, []);
+
   const phases = useSelector(statePhases);
 
   return (

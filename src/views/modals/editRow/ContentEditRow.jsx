@@ -9,16 +9,19 @@ import Phases from "./components/body/phases/Phases";
 import Tasks from "./components/body/tasks/Tasks";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  responseHours,
   stateIdRow,
   stateRows,
-  updateDataRow,
 } from "../../../store/reducers/hourReducer";
 import {
   getPhaseFilteredTasksApi,
   getPhasesApi,
   updateHoursApi,
 } from "../../../api/API";
-import { handleModal } from "../../../store/reducers/modalReducer";
+import {
+  handleModal,
+  resetContentModal,
+} from "../../../store/reducers/modalReducer";
 import { stateDataNow } from "../../../store/reducers/calendarReducer";
 
 const ContentEditRow = () => {
@@ -49,18 +52,20 @@ const ContentEditRow = () => {
   const onSubmit = (event) => {
     event.preventDefault();
 
-    const hour = {};
-    hour.amount = dataRow.amount;
-    hour.comment = "";
-    hour.comment = "IN_PROGRESS";
-    hour.user = `${dataRow.user.id}`;
-    hour.date = date;
-    hour.task = `${dataRow.task.id}`;
+    const hour = {
+      amount: dataRow.amount,
+      comment: "IN_PROGRESS",
+      user: `${dataRow.user.id}`,
+      date,
+      task: `${dataRow.task.id}`,
+    };
 
     updateHoursApi(dataRow.id, { hour });
 
-    dispatch(updateDataRow(dataRow));
+    dispatch(responseHours());
+
     dispatch(handleModal(false));
+    dispatch(resetContentModal());
   };
 
   return (

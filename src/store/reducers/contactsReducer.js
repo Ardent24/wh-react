@@ -54,7 +54,7 @@ const contactsReducer = createSlice({
 
 export const {
   setInputHeader,
-  resetFiters,
+  resetFilters,
   isSelectedList,
 } = contactsReducer.actions;
 

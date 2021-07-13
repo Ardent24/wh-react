@@ -12,10 +12,6 @@ const authReducer = createSlice({
       state.dataUser = action.payload;
       state.isAuthUser = true;
     },
-    getAuthUser(state, action) {
-      state.dataUser = action.payload;
-      state.isAuthUser = true;
-    },
     isAuthUser(state, action) {
       const [user, bool] = action.payload;
 
@@ -32,7 +28,6 @@ export default authReducer.reducer;
 
 export const {
   firstSetAuth,
-  getAuthUser,
   isAuthUser,
   setAuthUserPending,
 } = authReducer.actions;

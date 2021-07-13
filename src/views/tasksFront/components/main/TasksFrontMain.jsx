@@ -2,6 +2,8 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import styled from "styled-components";
 import TasksFrontBody from "./TasksFrontBody";
+import {useSelector} from "react-redux";
+import {isFilteredTasks} from "../../../../store/reducers/tasksReducer";
 
 const TableWrap = styled.div`
   margin-top: 2rem;
@@ -9,6 +11,8 @@ const TableWrap = styled.div`
 `;
 
 const TasksFrontMain = () => {
+  const stateTasks = useSelector(isFilteredTasks);
+
   return (
     <TableWrap>
       <Table striped bordered>
@@ -27,6 +31,7 @@ const TasksFrontMain = () => {
           <TasksFrontBody />
         </tbody>
       </Table>
+      {!stateTasks.length && <p className='text-center'>Ничего не найдено</p>}
     </TableWrap>
   );
 };

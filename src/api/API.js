@@ -1,18 +1,22 @@
 import axios from "axios";
 
-const isDevelopment = process.env.REACT_APP_ENV === "development";
+const BASE_URL = process.env.REACT_App_BASE_URL;
+const API_KEY = process.env.REACT_App_API_KEY;
+export const WH_URL = process.env.REACT_App_WH_URL;
 
-const BASE_URL = isDevelopment
-  ? "https://wh2api.sibers.com"
-  : "https://whapi.demo.sibers.com/";
+// const isDevelopment = process.env.REACT_APP_ENV === "development";
 
-const API_KEY = isDevelopment
-  ? "557a3d87ba73b749835d5502cbba5c0f2b6acfae"
-  : "1cb4b9323f375899910e226e5e985b3bf52901a4";
+// const BASE_URL = isDevelopment
+//   ? "https://wh2api.sibers.com"
+//   : "https://whapi.demo.sibers.com/";
 
-export const WH_URL = isDevelopment
-  ? "https://wh2.sibers.com"
-  : "http://development.wh2.dev7.sibers.com";
+// const API_KEY = isDevelopment
+//   ? "557a3d87ba73b749835d5502cbba5c0f2b6acfae"
+//   : "1cb4b9323f375899910e226e5e985b3bf52901a4";
+
+// export const WH_URL = isDevelopment
+//   ? "https://wh2.sibers.com"
+//   : "http://development.wh2.dev7.sibers.com";
 
 export const API = axios.create({
   baseURL: BASE_URL,

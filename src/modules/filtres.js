@@ -25,6 +25,9 @@ export const filteredBySelect = (array, selectList, key) => {
   });
 };
 
+export const filteredByValue = (arr, val) =>
+  arr.filter((el) => el.phase.name.toLowerCase().includes(val) || el.name.toLowerCase().includes(val));
+
 export const filteredByProject = (arr, val) =>
   arr.filter((el) => el.phase.name.toLowerCase().includes(val));
 

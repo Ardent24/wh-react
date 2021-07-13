@@ -4,15 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Form } from "react-bootstrap";
 import { postTasksApi } from "../../../api/API";
 import { editDate } from "../../../modules/date";
-import { handleModal } from "../../../store/reducers/modalReducer";
-import {
-  responseAllTasks,
-  responseTasks,
-} from "../../../store/reducers/tasksReducer";
+import {handleModal, resetContentModal} from "../../../store/reducers/modalReducer";
+import { addNewTask } from "../../../store/reducers/tasksReducer";
 import { stateIdUsers } from "../../../store/reducers/authReducer";
 import CreateTaskFooter from "./footer/CreateTaskFooter";
 import CreateTaskHeader from "./header/CreateTaskHeader";
 import CreateTaskBody from "./body/CreateTaskBody";
+import uuid from "react-uuid";
 
 const ContentCreateTask = () => {
   const dispatch = useDispatch();
@@ -32,18 +30,26 @@ const ContentCreateTask = () => {
 
     delete data.date;
 
-    const newData = { task: { ...data } };
-
-    newData.task.user = String(isIdUser);
-    newData.task.estimationTime = +newData.task.estimationTime;
-    newData.task.startDate = editDate(startDate);
-    newData.task.endDate = editDate(endDate);
+    const newData = {
+      task: {
+        ...data,
+        user: String(isIdUser),
+        estimationTime: +data.estimationTime,
+        startDate: editDate(startDate),
+        endDate: editDate(endDate),
+      },
+    };
 
     postTasksApi(newData);
+    newData.task.id = uuid();
+
+    dispatch(addNewTask(newData.task));
     dispatch(handleModal(false));
-    dispatch(responseTasks(0));
-    // this test all tasks
-    dispatch(responseAllTasks(0));
+    dispatch(resetContentModal());
+
+    // dispatch(responseTasks(0));
+    // // this test all tasks
+    // dispatch(responseAllTasks(0));
   };
 
   return (
